@@ -3,7 +3,7 @@ import {Cat} from './providers.interface'
 
 @Injectable()
 export class ProviderService {
-    private readonly cats : Cat[] = [];
+    private cats : Cat[] = [];
 
     create(cat:Cat){
         this.cats.push
