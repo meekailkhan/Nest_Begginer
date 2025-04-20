@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Header, HttpCode, HttpException, HttpStatus, Param, Post, Query, Redirect, Res} from "@nestjs/common";
+import { BadRequestException, Body, Controller, Get, Header, HttpCode, HttpException, HttpStatus, NotFoundException, Param, Post, Query, Redirect, Res} from "@nestjs/common";
 import { CatsService } from "./cats.service";
 import { Response } from "express";
 import { Observable, of } from "rxjs";
@@ -16,6 +16,24 @@ export class CatsController {
     // @HttpCode(201)
     findAllCats(@Res({passthrough:true}) response : Response ){
         throw new HttpException('Forbidden',HttpStatus.FORBIDDEN)
+    }
+
+    @Get('billa/:id')
+    findBilla(@Param() param : any){
+        let {id} = param;
+        if(!id){
+            throw new BadRequestException('id is required for search billa')
+        }
+        if(id !== '123'){
+            throw new NotFoundException(`this ${id} is not found any billa`)
+        }
+        return {
+            success : true,
+            data : {
+                id,
+                name : 'this is billa'
+            }
+        }
     }
 
     @Get("cat/*")
