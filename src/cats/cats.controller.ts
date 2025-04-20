@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Header, HttpCode, HttpStatus, Param, Post, Query, Redirect, Res} from "@nestjs/common";
+import { Body, Controller, Get, Header, HttpCode, HttpException, HttpStatus, Param, Post, Query, Redirect, Res} from "@nestjs/common";
 import { CatsService } from "./cats.service";
 import { Response } from "express";
 import { Observable, of } from "rxjs";
@@ -9,11 +9,13 @@ import { CreateCatDto } from "./creat-cat.dto";
 @Controller("cats")
 export class CatsController {
     constructor(private readonly catsService : CatsService){}
+    
+    
 
-    @Get("allCats")
+    @Get()
     // @HttpCode(201)
     findAllCats(@Res({passthrough:true}) response : Response ){
-        return 'there is all cats'
+        throw new HttpException('Forbidden',HttpStatus.FORBIDDEN)
     }
 
     @Get("cat/*")
@@ -37,7 +39,7 @@ export class CatsController {
 
     @Post()
     @Header('Cache-Control','no-store')
-    @Header('author',"meekail")
+    // @Header('author',"meekail")
     @HttpCode(200)
     addCat(){
         return "this action add new cat"
