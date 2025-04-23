@@ -7,9 +7,10 @@ import { LoggerMiddleware } from './comman/middleware/logger.middleware';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './filter/http-exception.filter';
 import { ProductModule } from './product/product.module';
+import { JobsModule } from './jobs/jobs.module';
 
 @Module({
-  imports: [CatsModule,ProviderModule,ProductModule],
+  imports: [CatsModule,ProviderModule,ProductModule,JobsModule],
   controllers: [AppController],
   providers: [
     AppService,
