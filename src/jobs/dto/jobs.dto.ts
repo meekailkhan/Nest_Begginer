@@ -15,7 +15,7 @@ class LocationDto {
 export class CreateJobDto {
     @IsString()
     @IsNotEmpty()
-    comapany : string
+    company : string
 
     @IsString()
     @IsNotEmpty()
@@ -38,7 +38,7 @@ export class CreateJobDto {
 
     @ArrayMinSize(1)
     @IsString({each : true})
-    tags? : string[]
+    tags : string
 
     @ValidateNested()
     @IsObject()
